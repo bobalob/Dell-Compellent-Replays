@@ -7,7 +7,7 @@
 )
 
 #Load the module and connect to the controller
-. C:\Scripts\ConnectDellCompellent.PS1 -Credential $Credential -scSn $scSn -port $port
+. "$($PSScriptRoot)\ConnectDellCompellent.PS1" -Credential $Credential -scSn $scSn -port $port
 if ($sc -eq $null) {break}
 
 #Get local disk object and SAN replay view
@@ -15,7 +15,7 @@ $ReplayView = Get-DellScVolume -Connection $conn | ? {$_.Name -eq "Automated Vie
 $LocalDisk = Get-Disk | ? {$_.UniqueId -eq $ReplayView.DeviceId}
 
 #Offline local disk
-Write-Host "Off-lining and detching disk $($LocalDisk.Number)"
+Write-Host "Offlining and detching disk $($LocalDisk.Number)"
 $LocalDisk
 Set-Disk -UniqueId $LocalDisk.UniqueId -IsOffline $True
 $LocalDisk = Get-Disk | ? {$_.UniqueId -eq $ReplayView.DeviceId}

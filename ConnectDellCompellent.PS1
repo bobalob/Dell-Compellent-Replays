@@ -2,7 +2,7 @@
     [Parameter(Mandatory=$true)]$Credential = (Get-Credential),
     [Parameter(Mandatory=$true)][string] $scSn,
     [Parameter(Mandatory=$true)][string] $port,
-    [Parameter(Mandatory=$true)]$DellPSLocation="C:\Scripts\DellStoragePowerShellSDK_v2_2_1_362\"
+    $DellPSLocation="C:\Scripts\DellStoragePowerShellSDK_v2_2_1_362\"
 )
 
 if (!(Test-Path $DellPSLocation)) {

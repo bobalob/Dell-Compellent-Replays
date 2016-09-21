@@ -7,7 +7,7 @@
 )
 
 #Load the module and connect to the controller
-. C:\Scripts\ConnectDellCompellent.PS1 -Credential $Credential -scSn $scSn -port $port
+. "$($PSScriptRoot)\ConnectDellCompellent.PS1" -Credential $Credential -scSn $scSn -port $port
 if ($sc -eq $null) {break}
 
 #Check the replay doesn't already exist
