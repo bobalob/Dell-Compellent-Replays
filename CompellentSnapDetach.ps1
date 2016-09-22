@@ -3,12 +3,14 @@
     [Parameter(Mandatory=$true)][string] $scSn,
     [Parameter(Mandatory=$true)][string] $serverName,
     [Parameter(Mandatory=$true)][string] $port,
+    [Parameter(Mandatory=$true)][string] $managementHostName,
     [Parameter(Mandatory=$true)][string] $TargetVolume
 )
 
 #Load the module and connect to the controller
-. "$($PSScriptRoot)\ConnectDellCompellent.PS1" -Credential $Credential -scSn $scSn -port $port
+. "$($PSScriptRoot)\ConnectDellCompellent.PS1" -Credential $Credential -scSn $scSn -port $port -managementHostName $managementHostName 
 if ($sc -eq $null) {break}
+
 
 #Get local disk object and SAN replay view
 $ReplayView = Get-DellScVolume -Connection $conn | ? {$_.Name -eq "Automated View of $($TargetVolume)"}

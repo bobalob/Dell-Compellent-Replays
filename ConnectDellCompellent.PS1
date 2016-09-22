@@ -2,6 +2,7 @@
     [Parameter(Mandatory=$true)]$Credential = (Get-Credential),
     [Parameter(Mandatory=$true)][string] $scSn,
     [Parameter(Mandatory=$true)][string] $port,
+    [Parameter(Mandatory=$true)][string] $managementHostName,
     $DellPSLocation="C:\Scripts\DellStoragePowerShellSDK_v2_2_1_362\"
 )
 
@@ -14,7 +15,7 @@ if (!(Test-Path $DellPSLocation)) {
 Import-Module "$($DellPSLocation)\DellStorage.ApiCommandSet.psd1"
 
 # Get the Connection to the Data Collector
-$conn = Connect-DellApiConnection -Host $hostname -Port $port -User $Credential.UserName -password $Credential.Password
+$conn = Connect-DellApiConnection -Host $managementHostName -Port $port -User $Credential.UserName -password $Credential.Password
 if($conn -eq $null) {
     Write-Host "Error Connecting to the Data Collector" -ForegroundColor Red
     break
